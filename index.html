@@ -1,215 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PetChart</title>
-    <style>
-      :root {
-        --bg: #f6f3ee;
-        --surface: #fffdf9;
-        --ink: #1f2a24;
-        --muted: #5d6b64;
-        --line: #e4ddd3;
-        --accent: #2f6f5e;
-        --accent-soft: #e4f1ec;
-        --shadow: 0 18px 40px rgba(31, 42, 36, 0.08);
-      }
 
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetChart</title>
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --surface: #fffdf9;
+      --ink: #1f2a24;
+      --muted: #5d6b64;
+      --line: #e4ddd3;
+      --accent: #2f6f5e;
+      --accent-soft: #e4f1ec;
+      --shadow: 0 18px 40px rgba(31, 42, 36, 0.08);
+    }
 
-      body {
-        margin: 0;
-        font-family: "Avenir Next", "Segoe UI", sans-serif;
-        color: var(--ink);
-        background:
-          radial-gradient(circle at top right, #efe4d4 0, transparent 32%),
-          var(--bg);
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      header,
-      main,
-      footer {
-        width: min(1080px, calc(100% - 32px));
-        margin: 0 auto;
-      }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, #efe4d4 0, transparent 32%),
+        var(--bg);
+    }
 
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 28px 0 18px;
-      }
+    header,
+    main,
+    footer {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-      }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 18px;
+    }
 
-      .mark {
-        width: 36px;
-        height: 36px;
-        border-radius: 12px;
-        background: var(--accent);
-        color: white;
-        display: grid;
-        place-items: center;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: white;
+      display: grid;
+      place-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      padding: 24px 0 48px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .button.ghost {
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .panel {
+      background: var(--accent-soft);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(47, 111, 94, 0.15);
+    }
+
+    .stat:last-child {
+      border-bottom: 0;
+    }
+
+    footer {
+      padding: 12px 0 36px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer p {
+      margin: 0 0 6px;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
       }
 
       nav {
-        display: flex;
-        gap: 18px;
+        display: none;
       }
+    }
+  </style>
+</head>
 
-      nav a {
-        color: var(--muted);
-        text-decoration: none;
-      }
+<body>
+  <header>
+    <div class="brand">
+      <div class="mark">P</div>
+      PetChart
+    </div>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#pets">Pets</a>
+      <a href="#records">Records</a>
+    </nav>
+  </header>
 
-      .hero {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 28px;
-        padding: 24px 0 48px;
-      }
+  <main>
+    <section class="hero" id="overview">
+      <article class="card">
+        <h1>One place , one chart , one complete comprehensive and consolidated chart for the pet you care for.</h1>
+        <p>
+          Track visits, medications, and notes in one calm place. Upload current pet information and AI will add to its
+          complete chart for you.
+        </p>
+        <div class="actions">
+          <button class="button primary" type="button">Add a pet</button>
+          <button class="button ghost" type="button">View sample chart</button>
+        </div>
+      </article>
 
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        box-shadow: var(--shadow);
-        padding: 28px;
-      }
-
-      h1 {
-        margin: 0 0 12px;
-        font-size: clamp(2rem, 4vw, 3.4rem);
-        line-height: 1.1;
-      }
-
-      p {
-        margin: 0 0 18px;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .button {
-        border: 0;
-        border-radius: 999px;
-        padding: 12px 18px;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .button.primary {
-        background: var(--accent);
-        color: white;
-      }
-
-      .button.ghost {
-        background: white;
-        color: var(--ink);
-        border: 1px solid var(--line);
-      }
-
-      .panel {
-        background: var(--accent-soft);
-        border-radius: 20px;
-        padding: 20px;
-      }
-
-      .stat {
-        display: flex;
-        justify-content: space-between;
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(47, 111, 94, 0.15);
-      }
-
-      .stat:last-child {
-        border-bottom: 0;
-      }
-
-      footer {
-        padding: 12px 0 36px;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      footer p {
-        margin: 0 0 6px;
-      }
-
-      @media (max-width: 800px) {
-        .hero {
-          grid-template-columns: 1fr;
-        }
-
-        nav {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="brand">
-        <div class="mark">P</div>
-        PetChart
-      </div>
-      <nav>
-        <a href="#overview">Overview</a>
-        <a href="#pets">Pets</a>
-        <a href="#records">Records</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero" id="overview">
-        <article class="card">
-          <h1>A simple chart for every pet you care for.</h1>
-          <p>
-            Track visits, medications, and notes in one calm place. This
-            template is ready to extend with your own data, forms, and charts.
-          </p>
-          <div class="actions">
-            <button class="button primary" type="button">Add a pet</button>
-            <button class="button ghost" type="button">View sample chart</button>
+      <aside class="card" id="pets">
+        <div class="panel" id="records">
+          <div class="stat">
+            <span>Active pets</span>
+            <strong>3</strong>
           </div>
-        </article>
-
-        <aside class="card" id="pets">
-          <div class="panel" id="records">
-            <div class="stat">
-              <span>Active pets</span>
-              <strong>3</strong>
-            </div>
-            <div class="stat">
-              <span>Upcoming visits</span>
-              <strong>2</strong>
-            </div>
-            <div class="stat">
-              <span>Open notes</span>
-              <strong>5</strong>
-            </div>
+          <div class="stat">
+            <span>Upcoming visits</span>
+            <strong>2</strong>
           </div>
-        </aside>
-      </section>
-    </main>
+          <div class="stat">
+            <span>Open notes</span>
+            <strong>5</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
 
-    <footer>
-      <p>PetChart template</p>
-      <p>&copy; 2026 PetChart. All rights reserved.</p>
-    </footer>
-  </body>
+  <footer>
+    <p>PetChart template</p>
+    <p>&copy; 2026 PetChart. All rights reserved.</p>
+  </footer>
+</body>
+
 </html>
